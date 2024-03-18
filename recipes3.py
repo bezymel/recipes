@@ -14,11 +14,11 @@ time_str = time_str.replace('шестнадцать', 'тридцать')  # з�
 content_2 = f"{content_2.split()[0]} {time_str}"  # обновление времени в файле 2.txt
 
 # Запись обновленных данных
-with open('2.txt', 'w') as file_2:
-    file_2.write(content_2)
-
 with open('1.txt', 'w') as file_1:
     file_1.writelines(content_1)
+
+with open('2.txt', 'w') as file_2:
+    file_2.write(content_2)
 
 with open('3.txt', 'w') as file_3:
     file_3.writelines(content_3)
