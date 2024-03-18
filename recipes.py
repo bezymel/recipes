@@ -1,27 +1,19 @@
-cook_book = {
-    'Омлет': [
-        {'ingredient_name': 'Яйцо', 'quantity': 2, 'measure': 'шт.'},
-        {'ingredient_name': 'Молоко', 'quantity': 100, 'measure': 'мл'},
-        {'ingredient_name': 'Помидор', 'quantity': 2, 'measure': 'шт'}
-    ],
-    'Утка по-пекински': [
-        {'ingredient_name': 'Утка', 'quantity': 1, 'measure': 'шт'},
-        {'ingredient_name': 'Вода', 'quantity': 2, 'measure': 'л'},
-        {'ingredient_name': 'Мед', 'quantity': 3, 'measure': 'ст.л'},
-        {'ingredient_name': 'Соевый соус', 'quantity': 60, 'measure': 'мл'}
-    ],
-    'Запеченный картофель': [
-        {'ingredient_name': 'Картофель', 'quantity': 1, 'measure': 'кг'},
-        {'ingredient_name': 'Чеснок', 'quantity': 3, 'measure': 'зубч'},
-        {'ingredient_name': 'Сыр гауда', 'quantity': 100, 'measure': 'г'}
-    ],
-    'Фахитос': [
-        {'ingredient_name': 'Говядина', 'quantity': 500, 'measure': 'г'},
-        {'ingredient_name': 'Перец сладкий', 'quantity': 1, 'measure': 'шт'},
-        {'ingredient_name': 'Лаваш', 'quantity': 2, 'measure': 'шт'},
-        {'ingredient_name': 'Винный уксус', 'quantity': 1, 'measure': 'ст.л'},
-        {'ingredient_name': 'Помидор', 'quantity': 2, 'measure': 'шт'}
-    ]
-}
+def read_cook_book_from_file(filename):
+    cook_book = {}
+    with open(filename, 'r') as file:
+        while True:
+            dish_name = file.readline().strip()
+            if not dish_name:
+                break
+            cook_book[dish_name] = []
+            ingredient_count = int(file.readline().strip())
+            for _ in range(ingredient_count):
+                ingredient_info = file.readline().strip().split(' | ')
+                ingredient = {'ingredient_name': ingredient_info[0], 'quantity': int(ingredient_info[1]), 'measure': ingredient_info[2]}
+                cook_book[dish_name].append(ingredient)
+    return cook_book
+
+filename = 'recipes.txt'
+cook_book = read_cook_book_from_file(filename)
 
 print(cook_book)
